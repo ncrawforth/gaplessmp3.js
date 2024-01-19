@@ -19,7 +19,7 @@ Create a GaplessMP3 object, passing an ```<audio>``` element to the constructor.
 * **clearTracks()** - not implemented yet.
 
 ### Events
-* **onplay** - called when playback requeted.
+* **onplay** - called when playback requested.
 * **onplaying** - called when playback starts.
 * **onpause** - called when playback pauses.
 * **ontimeupdate** - not implemented yet.
