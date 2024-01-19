@@ -20,8 +20,8 @@ Create a GaplessMP3 object, passing an ```<audio>``` element to the constructor.
 
 ### Events
 * **oncanplay** - called when enough audio data is available to start playback.
-* **onplay** - called when playback requested.
-* **onplaying** - called when playback starts.
+* **onplay** - called when playback is requested.
+* **onplaying** - called when playback actually starts.
 * **onwaiting** - called when playback stops to wait for data.
 * **onpause** - called when playback pauses.
 * **onended** - called when playback of the last track ends.
