@@ -1,2 +1,4 @@
 # gaplessmp3.js
-Javascript gapless MP3 player
+Javascript gapless MP3 player.
+
+This is for gapless MP3s encoded using Lame's ```--nogap``` option. See https://www.rockbox.org/wiki/GaplessHowTo.html and pay particular attention to the **What won't work** section.
