@@ -28,3 +28,7 @@ Create a GaplessMP3 object, passing an ```<audio>``` element to the constructor.
 ### Properties
 * **currentTrack** - the index of the currently playing track.
 * **currentTime** - the position within the currently playing track (read-only).
+
+## To do
+* Add buffer size, download rate options.
+* If user skips to next track and it's already downloaded, don't redownload it.
