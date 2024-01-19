@@ -29,17 +29,14 @@ class GaplessMP3 {
       while (true) {
         if (buffer.length < bufferChunks && bufferTrack < tracks.length) {
           try {
-            let mybuffer = buffer;
             let f = await fetch(tracks[bufferTrack], {headers: {"Range": "bytes=" + bufferByte + "-" + (bufferByte + chunkSize - 1)}});
             let a = await f.arrayBuffer();
-            if (mybuffer === buffer) {
-              buffer.push(a);
-              if (a.byteLength == chunkSize) {
-                bufferByte += chunkSize;
-              } else {
-                bufferByte = 0;
-                bufferTrack++;
-              }
+            buffer.push(a);
+            if (a.byteLength == chunkSize) {
+              bufferByte += chunkSize;
+            } else {
+              bufferByte = 0;
+              bufferTrack++;
             }
           } catch {}
         }
