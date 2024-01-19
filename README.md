@@ -22,7 +22,7 @@ Create a GaplessMP3 object, passing an ```<audio>``` element to the constructor.
 * **onplay** - called when playback requeted.
 * **onplaying** - called when playback starts.
 * **onpause** - called when playback pauses.
-* **ontimeupdate** - called when currentTime or currentTrack is updated.
+* **ontimeupdate** - not implemented yet.
 
 ### Properties
 * **currentTime** - not implemented yet.
