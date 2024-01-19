@@ -19,10 +19,12 @@ Create a GaplessMP3 object, passing an ```<audio>``` element to the constructor.
 * **clearTracks()** - clears the playlist.
 
 ### Events
+* **oncanplay** - called when enough audio data is available to start playback.
 * **onplay** - called when playback requested.
 * **onplaying** - called when playback starts.
 * **onwaiting** - called when playback stops to wait for data.
 * **onpause** - called when playback pauses.
+* **onended** - called when playback of the last track ends.
 * **ontimeupdate** - called when currentTrack or currentTime changes.
 
 ### Properties
