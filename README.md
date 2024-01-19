@@ -27,4 +27,4 @@ Create a GaplessMP3 object, passing an ```<audio>``` element to the constructor.
 
 ### Properties
 * **currentTrack** - the index of the currently playing track.
-* **currentTime** - the position within the currently playing track.
+* **currentTime** - the position within the currently playing track (read-only).
