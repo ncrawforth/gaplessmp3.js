@@ -16,7 +16,7 @@ Create a GaplessMP3 object, passing an ```<audio>``` element to the constructor.
 * **addTrack(url)** - adds a track to the playlist and returns the added track number.
 * **play()** - begins playback.
 * **pause()** - pauses playback.
-* **clearTracks()** - not implemented yet.
+* **clearTracks()** - clears the playlist.
 
 ### Events
 * **onplay** - called when playback requested.
