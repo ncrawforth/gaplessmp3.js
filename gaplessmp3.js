@@ -49,8 +49,9 @@ class GaplessMP3 {
     Object.defineProperty(player, "currentTrack", {get: function() {
       return currentTrack;
     }, set: function(v) {
-      trackTimestamps = [0];
       currentTrack = Math.max(0, Math.min(v, tracks.length - 1));
+      trackTimestamps = [0];
+      for (let i = 0; i < currentTrack; i++) trackTimestamps.push(0);
       currentTime = 0;
       let mediaSource = new MediaSource();
       mediaSource.onsourceopen = mediaSourceOpen;
