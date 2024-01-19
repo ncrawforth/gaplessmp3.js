@@ -60,10 +60,12 @@ class GaplessMP3 {
     Object.defineProperty(player, "currentTime", {get: function() {
       return currentTime;
     }});
+    Object.defineProperty(player, "oncanplay", {writable: true});
     Object.defineProperty(player, "onplay", {writable: true});
     Object.defineProperty(player, "onplaying", {writable: true});
     Object.defineProperty(player, "onwaiting", {writable: true});
     Object.defineProperty(player, "onpause", {writable: true});
+    Object.defineProperty(player, "onended", {writable: true});
     Object.defineProperty(player, "ontimeupdate", {writable: true});
     player.addTrack = function(url) {
       tracks.push(url);
@@ -80,10 +82,12 @@ class GaplessMP3 {
     };
     player.play = function() {mediaElement.play();};
     player.pause = function() {mediaElement.pause();};
+    mediaElement.addEventListener("canplay", function() {if (player.oncanplay) player.oncanplay();});
     mediaElement.addEventListener("play", function() {if (player.onplay) player.onplay();});
     mediaElement.addEventListener("playing", function() {if (player.onplaying) player.onplaying();});
     mediaElement.addEventListener("waiting", function() {if (player.onplaying) player.onwaiting();});
     mediaElement.addEventListener("pause", function() {if (player.onpause) player.onpause();});
+    mediaElement.addEventListener("ended", function() {if (player.onended) player.onended();});
     mediaElement.addEventListener("timeupdate", function() {
       for (let i = 0; i < tracks.length; i++) {
         if (trackTimestamps[i] != undefined && mediaElement.currentTime >= trackTimestamps[i]) {
