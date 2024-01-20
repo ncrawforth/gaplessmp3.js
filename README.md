@@ -17,6 +17,7 @@ Create a GaplessMP3 object, passing an ```<audio>``` element to the constructor.
 * **play()** - begins playback.
 * **pause()** - pauses playback.
 * **clearTracks()** - clears the playlist.
+* **close()** - clears the playlist and detaches from the ```<audio>``` element.
 
 ### Events
 * **oncanplay** - called when enough audio data is available to start playback.
