@@ -51,6 +51,7 @@ class GaplessMP3 {
         return currentTrack;
       },
       set: function(v) {
+        let playing = !mediaElement.paused;
         currentTrack = Math.max(0, Math.min(v, tracks.length - 1));
         trackTimestamps = [0];
         for (let i = 0; i < currentTrack; i++) trackTimestamps.push(0);
@@ -58,6 +59,7 @@ class GaplessMP3 {
         let mediaSource = new MediaSource();
         mediaSource.onsourceopen = mediaSourceOpen;
         mediaElement.src = URL.createObjectURL(mediaSource);
+        if (playing) mediaElement.play();
       }
     });
     Object.defineProperty(player, "currentTime", {
