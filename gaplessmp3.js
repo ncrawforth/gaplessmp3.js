@@ -82,13 +82,14 @@ class GaplessMP3 {
     };
     player.play = function() {mediaElement.play();};
     player.pause = function() {mediaElement.pause();};
-    mediaElement.addEventListener("canplay", function() {if (player.oncanplay) player.oncanplay();});
-    mediaElement.addEventListener("play", function() {if (player.onplay) player.onplay();});
-    mediaElement.addEventListener("playing", function() {if (player.onplaying) player.onplaying();});
-    mediaElement.addEventListener("waiting", function() {if (player.onplaying) player.onwaiting();});
-    mediaElement.addEventListener("pause", function() {if (player.onpause) player.onpause();});
-    mediaElement.addEventListener("ended", function() {if (player.onended) player.onended();});
-    mediaElement.addEventListener("timeupdate", function() {
+    const eventListeners = {
+      canplay: function() {if (player.oncanplay) player.oncanplay();},
+      play: function() {if (player.onplay) player.onplay();},
+      playing: function() {if (player.onplaying) player.onplaying();},
+      waiting: function() {if (player.onwaiting) player.onwaiting();},
+      pause: function() {if (player.onpause) player.onpause();},
+      ended: function() {if (player.onended) player.onended();},
+      timeupdate: function() {
       for (let i = 0; i < tracks.length; i++) {
         if (trackTimestamps[i] != undefined && mediaElement.currentTime >= trackTimestamps[i]) {
           currentTrack = i;
@@ -96,7 +97,16 @@ class GaplessMP3 {
       }
       currentTime = mediaElement.currentTime - trackTimestamps[currentTrack];
       if (player.ontimeupdate) player.ontimeupdate();
-    });
+    }};
+    for (let e in eventListeners) mediaElement.addEventListener(e, eventListeners[e]);
+    player.close = function() {
+      for (let e in eventListeners) mediaElement.removeEventListener(e, eventListeners[e]);
+      tracks = [];
+      trackTimestamps = [0];
+      currentTrack = 0;
+      currentTime = 0;
+      mediaElement.src = "";
+    }
     player.clearTracks();
   }
 }
