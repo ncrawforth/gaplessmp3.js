@@ -46,20 +46,25 @@ class GaplessMP3 {
         await new Promise(function(resolve) {setTimeout(resolve, 2000);});
       }
     };
-    Object.defineProperty(player, "currentTrack", {get: function() {
-      return currentTrack;
-    }, set: function(v) {
-      currentTrack = Math.max(0, Math.min(v, tracks.length - 1));
-      trackTimestamps = [0];
-      for (let i = 0; i < currentTrack; i++) trackTimestamps.push(0);
-      currentTime = 0;
-      let mediaSource = new MediaSource();
-      mediaSource.onsourceopen = mediaSourceOpen;
-      mediaElement.src = URL.createObjectURL(mediaSource);
-    }});
-    Object.defineProperty(player, "currentTime", {get: function() {
-      return currentTime;
-    }});
+    Object.defineProperty(player, "currentTrack", {
+      get: function() {
+        return currentTrack;
+      },
+      set: function(v) {
+        currentTrack = Math.max(0, Math.min(v, tracks.length - 1));
+        trackTimestamps = [0];
+        for (let i = 0; i < currentTrack; i++) trackTimestamps.push(0);
+        currentTime = 0;
+        let mediaSource = new MediaSource();
+        mediaSource.onsourceopen = mediaSourceOpen;
+        mediaElement.src = URL.createObjectURL(mediaSource);
+      }
+    });
+    Object.defineProperty(player, "currentTime", {
+      get: function() {
+        return currentTime;
+      }
+    });
     Object.defineProperty(player, "oncanplay", {writable: true});
     Object.defineProperty(player, "onplay", {writable: true});
     Object.defineProperty(player, "onplaying", {writable: true});
@@ -90,14 +95,15 @@ class GaplessMP3 {
       pause: function() {if (player.onpause) player.onpause();},
       ended: function() {if (player.onended) player.onended();},
       timeupdate: function() {
-      for (let i = 0; i < tracks.length; i++) {
-        if (trackTimestamps[i] != undefined && mediaElement.currentTime >= trackTimestamps[i]) {
-          currentTrack = i;
+        for (let i = 0; i < tracks.length; i++) {
+          if (trackTimestamps[i] != undefined && mediaElement.currentTime >= trackTimestamps[i]) {
+            currentTrack = i;
+          }
         }
+        currentTime = mediaElement.currentTime - trackTimestamps[currentTrack];
+        if (player.ontimeupdate) player.ontimeupdate();
       }
-      currentTime = mediaElement.currentTime - trackTimestamps[currentTrack];
-      if (player.ontimeupdate) player.ontimeupdate();
-    }};
+    };
     for (let e in eventListeners) mediaElement.addEventListener(e, eventListeners[e]);
     player.close = function() {
       for (let e in eventListeners) mediaElement.removeEventListener(e, eventListeners[e]);
@@ -106,7 +112,7 @@ class GaplessMP3 {
       currentTrack = 0;
       currentTime = 0;
       mediaElement.src = "";
-    }
+    };
     player.clearTracks();
   }
 }
