@@ -38,7 +38,7 @@ class GaplessMP3 {
               if (bufferTrack == tracks.length) {
                 e.target.endOfStream();
               }
-              trackTimestamps[bufferTrack] = sourceBuffer.timestampOffset;
+              trackTimestamps.push(sourceBuffer.timestampOffset);
             }
             buffer.shift();
           } catch {}
